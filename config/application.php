@@ -74,6 +74,66 @@ define('NONCE_SALT', env('NONCE_SALT'));
 define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 define('DISALLOW_FILE_EDIT', true);
+define('GOOGLE_TAG_MANAGER_ID', env('GOOGLE_TAG_MANAGER_ID'));
+
+/** WP Offload S3 AWS Settings
+* See: https://deliciousbrains.com/wp-offload-s3/doc/quick-start-guide/
+*/
+define( 'DBI_AWS_ACCESS_KEY_ID', env('OFFLOAD_S3_ACCESS_KEY'));
+define( 'DBI_AWS_SECRET_ACCESS_KEY', env('OFFLOAD_S3_SECRET_KEY'));
+
+/** WP Offload S3 Config
+* See: https://deliciousbrains.com/wp-offload-s3/doc/settings-constants/
+*/
+define( 'WPOS3_SETTINGS', serialize( array(
+    // S3 bucket to upload files
+    'bucket' => env('OFFLOAD_S3_BUCKET'),
+    // Automatically copy files to S3 on upload
+    'copy-to-s3' => env('OFFLOAD_S3_COPY_ON_UPLOAD'),
+    // Rewrite file URLs to S3
+    'serve-from-s3' => true,
+    // S3 URL format to use ('path', 'cloudfront')
+    'domain' => env('OFFLOAD_S3_SERVE_FROM'),
+    // Custom domain if 'domain' set to 'cloudfront'
+    'cloudfront' => env('OFFLOAD_S3_CLOUDFRONT_DOMAIN'),
+    // Enable object prefix, useful if you use your bucket for other files
+    'enable-object-prefix' => true,
+    // Object prefix to use if 'enable-object-prefix' is 'true'
+    'object-prefix' => 'app/uploads/',
+    // Organize S3 files into YYYY/MM directories
+    'use-yearmonth-folders' => true,
+    // Serve files over HTTPS
+    'force-https' => true,
+    // Remove the local file version once offloaded to S3
+    'remove-local-file' => false,
+    // Append a timestamped folder to path of files offloaded to S3
+    'object-versioning' => true,
+) ) );
+
+define( 'WPOS3_ASSETS_SETTINGS', serialize( array(
+    // S3 bucket to upload assets
+    'bucket' => env('OFFLOAD_S3_BUCKET'),
+    // Copy assets to S3 and rewrite URLs
+    'enable-addon' => env('OFFLOAD_S3_USE_ASSETS_ADDON'),
+    // Enable automatic scanning
+    'enable-cron' => true,
+    // Extensions to offload to S3
+    'file-extensions' => 'css,js,jpg,jpeg,png,gif,woff,woff2,ttf,svg,eot,otf,ico',
+    // S3 URL format to use ('path', 'cloudfront')
+    'domain' => env('OFFLOAD_S3_SERVE_FROM'),
+    // Custom domain if 'domain' set to 'cloudfront'
+    'cloudfront' => env('OFFLOAD_S3_CLOUDFRONT_DOMAIN'),
+    // Enable object prefix, useful if you use your bucket for other files
+    'enable-script-object-prefix' => false,
+    // Object prefix to use if 'enable-object-prefix' is 'true'
+    'object-prefix' => '',
+    // Minify CSS and JS files
+    'enable-minify' => true,
+    // Gzip files before offloading to S3
+    'enable-gzip' => true,
+    // Iniate a scan using a URL endpoint
+    'enable-custom-endpoint' => false,
+) ) );
 
 /**
  * Bootstrap WordPress
