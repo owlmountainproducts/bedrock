@@ -16,6 +16,11 @@ web/.htaccess
 .env.*
 !.env.example
 
+# Databases
+*.sql
+*.gz
+*.zip
+
 # Composer
 vendor/*
 !vendor/.gitkeep
