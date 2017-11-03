@@ -75,6 +75,9 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 define('DISALLOW_FILE_EDIT', true);
 define('GOOGLE_TAG_MANAGER_ID', env('GOOGLE_TAG_MANAGER_ID'));
+define('WP_SENTRY_DSN', env('WP_SENTRY_DSN'));
+define('WP_SENTRY_ERROR_TYPES', E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_USER_DEPRECATED);
+define('WP_SENTRY_ENV', env('WP_ENV'));
 
 /** WP Offload S3 AWS Settings
 * See: https://deliciousbrains.com/wp-offload-s3/doc/quick-start-guide/
